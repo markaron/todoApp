@@ -1,0 +1,20 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet"/>
+
+</head>
+<body>
+<form action="#" th:action="@{/todo/adder}" method="post">
+    <label for="todoId">What to do?:</label>
+    <input type="text" id="todoId" name="todoDesc"/>
+    <input type="submit" value="Nyomd meg a gombot, kapsz egy liba combot"/>
+    <a href="/todo">Back to main</a>
+</form>
+<script src="webjars/jquery/1.11.1/jquery.min.js"></script>
+<script src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+</body>
+</html>
