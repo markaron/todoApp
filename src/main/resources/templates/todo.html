@@ -55,10 +55,10 @@
                                 </td>
                                 <td>
                                     <a class="label label-info" th:href="'/' + ${todo.getId()} + '/edit'">edit</a>
-                                </td>
+                                </td>"/search/{searchString}"
                             </tr>
                         </table>
-            <form action="#" th:action="@{search}" method="post">
+            <form action="#" th:action="@{/search}" method="post">
                 <label for="todoId">Search</label>
                 <input type="text" id="todoId" name="title"/>
                 <input type="submit" value="Search"/>
