@@ -51,6 +51,12 @@ public class TodoController {
     repo.save(modifiedTodo);
     return "redirect:/todo";
   }
+
+  @GetMapping("/search/{searchString}")
+  public String search(@PathVariable(name = "searchString") String searchString){
+    repo.findAllByTitle(searchString);
+    return "redirect:/todo";
+  }
 }
 
 

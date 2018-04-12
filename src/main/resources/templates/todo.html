@@ -58,7 +58,12 @@
                                 </td>
                             </tr>
                         </table>
+            <form action="#" th:action="@{search}" method="post">
+                <label for="todoId">Search</label>
+                <input type="text" id="todoId" name="title"/>
+                <input type="submit" value="Search"/>
 
+            </form>
 
         </div>
     </div>
