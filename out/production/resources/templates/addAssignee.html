@@ -1,0 +1,20 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add human</title>
+    <link href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet"/>
+
+</head>
+<body>
+<form action="#" th:action="@{/todo/assign}" method="post">
+    <label>Add Human</label>
+    <input type="text" name="newAssignee"/>
+    <input type="email" name="newEmail"/>
+    <input type="submit" value="Add Human"/>
+</form>
+<script src="webjars/jquery/1.11.1/jquery.min.js"></script>
+<script src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+</body>
+</html>

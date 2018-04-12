@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 </head>
 <body>
 <form action="#" th:action="@{/todo/adder}" method="post">
-    <label for="todoId">What to do?:</label>
-    <input type="text" id="todoId" name="todoDesc"/>
+    <label>What to do?:</label>
+    <input type="text" name="todoDesc"/>
     <input type="submit" value="Nyomd meg a gombot, kapsz egy liba combot"/>
     <a href="/todo">Back to main</a>
 </form>

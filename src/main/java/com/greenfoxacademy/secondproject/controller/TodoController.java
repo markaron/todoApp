@@ -1,6 +1,8 @@
 package com.greenfoxacademy.secondproject.controller;
 
+import com.greenfoxacademy.secondproject.model.Assignee;
 import com.greenfoxacademy.secondproject.model.Todo;
+import com.greenfoxacademy.secondproject.repository.AssigneeRepo;
 import com.greenfoxacademy.secondproject.repository.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,8 @@ public class TodoController {
 
   @Autowired
   Repository repo;
+  @Autowired
+  AssigneeRepo assigneeRepo;
 
   @GetMapping(value = {"/todo", "/todo/list", "/"})
   public String list(Model model, @RequestParam(name = "isActive", required = false) boolean isDone) {
@@ -52,11 +56,45 @@ public class TodoController {
     return "redirect:/todo";
   }
 
-  @GetMapping("/search/{searchString}")
-  public String search(@PathVariable(name = "searchString") String searchString){
-    repo.findAllByTitle(searchString);
-    return "redirect:/todo";
+   @PostMapping("/todo")
+   public String search(@ModelAttribute (name = "searchString") String searchString, Model model){
+      model.addAttribute("todos",repo.findAllByTitle(searchString));
+      return "todo";
+  }
+
+  @GetMapping("/todo/assign")
+  public String assigneePage(Model model){
+    model.addAttribute("assigneeList", assigneeRepo.findAll());
+    return "assignee";
+  }
+
+  @GetMapping(value = "/todo/addAssignee")
+  public String addAssigneePage() {
+    return "addAssignee";
+  }
+
+  @PostMapping(value = "/todo/assign")
+  public String addAssignee(@ModelAttribute(name = "newAssignee") String newHuman,
+                            @ModelAttribute(name = "newEmail") String newEmail) {
+    assigneeRepo.save(new Assignee(newHuman, newEmail));
+    return "redirect:/todo/assign";
+  }
+
+  @GetMapping("/{id}/deleteHuman")
+  public String deleteHuman(@PathVariable(name = "id") Long id){
+    assigneeRepo.deleteById(id);
+    return "redirect:/todo/assign";
+  }
+
+  @GetMapping("/{id}/editHuman")
+  public String editHumanPage(@PathVariable(name = "id") Long id, Model model){
+    model.addAttribute("assigneeHuman", assigneeRepo.findById(id).get());
+    return "editHuman";
+  }
+
+  @PostMapping("/{id}/editHuman")
+  public String editHuman(@ModelAttribute Assignee modifiedAssignee){
+    assigneeRepo.save(modifiedAssignee);
+    return "redirect:/todo/assign";
   }
 }
-
-

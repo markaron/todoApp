@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>ToDo</title>
-    <link href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <style>
         table, th, td {
             border: 1px solid black;
             text-align: center;
+            font-size: large;
         }
 
         th {
@@ -31,7 +32,9 @@
 <h2 align="center">
     <a class="label label-success" href="/todo/adder">What has to be done, master?</a>
 </h2>
-
+<h2 align="center">
+    <a class="label label-success" href="/todo/assign">Checkout the assignees</a>
+</h2>
 <div class="container">
     <div class="row">
         <div class="col-sm">
@@ -47,8 +50,8 @@
                             <tr th:each="todo : ${todos}">
                                 <td th:text="${todo.getId()}"></td>
                                 <td th:text="${todo.getTitle()}"></td>
-                                <td th:text="${todo.isUrgent()}"></td>
-                                <td th:text="${todo.isDone()}"></td>
+                                <td th:text="${todo.isUrgent()} ? '&#9888' : '&#128125'"></td>
+                                <td th:text="${todo.isDone()} ? '&#128076' : '&#128169' "></td>
                                 <td>
                                     <a class="label label-danger" th:href="'/' + ${todo.getId()} + '/delete'">NO</a>
                                 </td>
@@ -57,7 +60,11 @@
                                 </td>
                             </tr>
                         </table>
-
+            <form action="#" th:action="@{/todo}" method="post">
+                <label for="todoId">Search</label>
+                <input type="text" id="todoId" name="searchString"/>
+                <input type="submit" value="Search"/>
+            </form>
 
         </div>
     </div>
