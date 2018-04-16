@@ -47,6 +47,7 @@ public class TodoController {
   @GetMapping("/{id}/edit")
   public String editPage(@PathVariable(name = "id") Long id, Model model){
     model.addAttribute("todo", repo.findById(id).get());
+    model.addAttribute("assignee", assigneeRepo.findAll());
     return "edit";
   }
 
@@ -86,15 +87,22 @@ public class TodoController {
     return "redirect:/todo/assign";
   }
 
-  @GetMapping("/{id}/editHuman")
-  public String editHumanPage(@PathVariable(name = "id") Long id, Model model){
+  @GetMapping("/{assigneeId}/editHuman")
+  public String editHumanPage(@PathVariable(name = "assigneeId") Long id, Model model){
     model.addAttribute("assigneeHuman", assigneeRepo.findById(id).get());
     return "editHuman";
   }
 
-  @PostMapping("/{id}/editHuman")
+  @PostMapping("/{assigneeId}/editHuman")
   public String editHuman(@ModelAttribute Assignee modifiedAssignee){
     assigneeRepo.save(modifiedAssignee);
     return "redirect:/todo/assign";
+  }
+
+  @GetMapping(value = "/assignees/{id}/todolist")
+  public String assigneeTodoListPage(@PathVariable (name = "id") Long id, Model model){
+    model.addAttribute("assignee", assigneeRepo.findById(id).get());
+    model.addAttribute("todos", assigneeRepo.findById(id).get().getTodoList());
+    return "assgineetodolist";
   }
 }

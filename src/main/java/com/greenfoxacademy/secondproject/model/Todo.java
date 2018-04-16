@@ -1,9 +1,6 @@
 package com.greenfoxacademy.secondproject.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Todo {
@@ -14,6 +11,10 @@ public class Todo {
   private String title;
   private boolean urgent = false;
   private boolean done = false;
+
+  @ManyToOne
+  @JoinColumn(name = "assigneeId")
+  private Assignee assignee;
 
   public Todo() {
   }
@@ -26,6 +27,14 @@ public class Todo {
 
   public Todo(String title) {
     this.title = title;
+  }
+
+  public Assignee getAssignee() {
+    return assignee;
+  }
+
+  public void setAssignee(Assignee assignee) {
+    this.assignee = assignee;
   }
 
   public String getTitle() {

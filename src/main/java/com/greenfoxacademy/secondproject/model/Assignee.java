@@ -1,18 +1,19 @@
 package com.greenfoxacademy.secondproject.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Assignee {
 
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Id
-  private Long id;
+  private Long assigneeId;
   private String name;
   private String email;
+
+  @OneToMany(mappedBy = "assignee")
+  private List<Todo> todoList;
 
   public Assignee() {
   }
@@ -22,12 +23,12 @@ public class Assignee {
     this.email = email;
   }
 
-  public Long getId() {
-    return id;
+  public Long getAssigneeId() {
+    return assigneeId;
   }
 
-  public void setId(Long id) {
-    this.id = id;
+  public void setAssigneeId(Long assigneeId) {
+    this.assigneeId = assigneeId;
   }
 
   public String getName() {
@@ -44,5 +45,13 @@ public class Assignee {
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  public List<Todo> getTodoList() {
+    return todoList;
+  }
+
+  public void setTodoList(List<Todo> todoList) {
+    this.todoList = todoList;
   }
 }

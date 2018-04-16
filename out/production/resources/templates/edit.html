@@ -11,7 +11,14 @@
         <div class="col-sm">
             <form action="#" th:action="@{edit}" th:object="${todo}" method="post">
                 <label for="todoId">Change the description:</label>
-                <input type="text" id="todoId" th:value="*{getTitle()}" name="title"/>
+                    <input type="text" id="todoId" th:value="*{getTitle()}" name="title"/>
+                <label for="todoId">Assignees</label>
+                <select th:field="*{assignee}">
+                    <option th:each="oneAssignee : ${assignee}"
+                            th:value="${oneAssignee.assigneeId}"
+                            th:text="${oneAssignee.name}">
+                    </option>
+                </select>
                 <p>Is it urgent?<input type="checkbox" name="urgent" th:checked="*{urgent}"></p>
                 <p>Is it done?<input type="checkbox" name="done" th:checked="*{done}"></p>
                 <input type="submit" value="Press the button to modify"/>

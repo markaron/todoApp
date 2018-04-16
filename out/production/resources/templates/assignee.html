@@ -25,10 +25,13 @@
                     <td th:text="${assignee.getName()}"></td>
                     <td th:text="${assignee.getEmail()}"></td>
                     <td>
-                        <a class="label label-danger" th:href="'/' + ${assignee.getId()} + '/deleteHuman'">delete</a>
+                        <a class="label label-danger" th:href="'/' + ${assignee.getAssigneeId()} + '/deleteHuman'">delete</a>
                     </td>
                     <td>
-                        <a class="label label-info" th:href="'/' + ${assignee.getId()} + '/editHuman'">edit</a>
+                        <a class="label label-info" th:href="'/' + ${assignee.getAssigneeId()} + '/editHuman'">edit</a>
+                    </td>
+                    <td>
+                        <a class="label label-info" th:href="'/assignees/' + ${assignee.getAssigneeId()} + '/todolist'">Todos</a>
                     </td>
                 </tr>
                 </tbody>
